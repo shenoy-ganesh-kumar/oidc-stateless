@@ -1,0 +1,40 @@
+server:
+  max-http-header-size: 64KB
+  cors:
+    origins:
+      - http://localhost:3000
+      - https://dev-1329028.okta.com
+      
+spring:
+  profiles:
+    active: dev
+  security:
+    oauth2:
+      client:
+        registration:
+          okta:
+            client-id: 0oakfqoqrUPcdqVG35d6
+            client-secret: Koa_DmuMe6q3-c3RsU3IQVeO50nMoTraVEarFX08
+            scope: openid, email, profile
+            redirect-uri: http://localhost:8080/login/oauth2/code/okta
+        provider:
+          okta:
+            issuer-uri: https://dev-1329028.okta.com/oauth2/default
+            authorization-uri: https://dev-1329028.okta.com/oauth2/default/v1/authorize
+            token-uri: https://dev-1329028.okta.com/oauth2/default/v1/token
+            user-info-uri: https://dev-1329028.okta.com/oauth2/default/v1/userinfo
+            jwk-set-uri: https://dev-1329028.okta.com/oauth2/default/v1/keys
+  mustache:
+    suffix: .mustache
+  datasource:
+    url: jdbc:mysql://localhost:3306/openid_security?useSSL=false&characterEncoding=utf8
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+
+# This is a dummy encryption key placed here to allow the sample application to
+# run without specifying additional environment variables or system properties.
+session:
+  encryption:
+    key:
+      base64: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
